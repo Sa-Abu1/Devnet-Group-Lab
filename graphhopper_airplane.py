@@ -9,7 +9,6 @@ route_url = "https://graphhopper.com/api/1/route?"
 # Replace with your Graphhopper API key
 key = "8068d8ca-a8ab-404f-aade-bf6fe1beec3c"
 
-# Geocoding function
 def geocoding(location, key):
     while location == "":
         location = input("Enter location again: ")
@@ -35,7 +34,6 @@ def geocoding(location, key):
     else:
         return json_status, "null", "null", location
 
-# Airplane simulation using great-circle distance
 def airplane_route(orig, dest):
     if orig[1] == "null" or dest[1] == "null":
         print("Error: invalid coordinates.")
@@ -73,6 +71,7 @@ orig = geocoding(loc1, key)
 loc2 = input("Destination: ")
 dest = geocoding(loc2, key)
 
+# Routing or airplane fallback
 if vehicle == "airplane":
     airplane_route(orig, dest)
 else:
@@ -110,5 +109,5 @@ else:
                     path, distance/1000, distance/1000/1.61))
             print("=================================================")
         else:
-            print("Error message: " + paths_data.get("message", "Unknown error"))
-            print("*************************************************")
+            print("No valid route found. Falling back to airplane mode...")
+            airplane_route(orig, dest)
