@@ -1,6 +1,11 @@
 import requests
 import urllib.parse
-from geopy.distance import great_circle
+try:
+    from geopy.distance import great_circle
+except ModuleNotFoundError:
+    print("\nERROR: geopy is missing.")
+    print("Please run: pip3 install geopy\n")
+    exit(1)
 
 # Base URLs
 geocode_url = "https://graphhopper.com/api/1/geocode?"
